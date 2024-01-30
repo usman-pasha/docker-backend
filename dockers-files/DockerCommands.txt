@@ -1,0 +1,57 @@
+Reference Documents
+https://docs.docker.com/build/building/base-images/
+https://docs.docker.com/engine/reference/commandline/image_rm/
+https://docs.docker.com/engine/reference/commandline/container_exec/
+
+Refernce documents for environment variable for angular project
+https://pumpingco.de/blog/environment-variables-angular-docker/
+
+
+Generate Docker Image
+docker build -t <image-name> .
+
+Run docker image as a container
+Standard command to run as docker container
+docker run --rm hello
+example
+
+
+docker run -d -p 5010:5010 -e "TCPLISTENER_API_ENDPOINT=https://api.aszapp.in/MegaEvent/api/TCPListner/" --name tcpservice tcpservice:v18
+-d = detacched mode (optional)
+-p = ports          (optional)
+-e = environment variable(optiona)
+--name= name of container (optional) 
+tcpservice:v18 == ImageName (mandatory)
+
+
+To save the dockerimage as rar file
+docker save  <image-name> > filename.tar
+
+To load the rar file into docker
+docker load < <image-name>
+
+
+
+
+To view all images
+-docker images
+
+
+
+
+To view all running container process
+-docker ps -a
+
+
+To access running container 
+-docker exec -ti <container-name> /bin/bash
+
+
+
+
+Run multiple docker images  from docker compose file 
+
+
+https://docs.docker.com/compose/compose-file/
+
+--Already one docker-compose file is added in drive folder for reference

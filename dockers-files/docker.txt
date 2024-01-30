@@ -1,0 +1,108 @@
+Docker and Containers
+
+1. check docker status 
+   docker -v
+
+2. check docker images 
+   docker images 
+   or 
+   docker image ls
+
+3. Build Docker Images
+   syntax 
+   docker build -t image_name:version_number .
+    1.docker build command is used to build a Docker image from a Dockerfile. 
+	2.-t flag allows you to tag
+	3.image_name indicates the container image name 
+	4.version_number indicates the image version	
+	5.he dot (.) at the end of the command.. 
+	  It indicates that the Docker image should be built from the current directory.
+		
+   example		
+   docker build -t testing:0.0.1 .
+   
+4. Convert Docker image of the Application into a Running container.
+   syntax 
+   docker container run -d --name <name_of_app> -p <local_port>:<docker_port> <image_name>:<version>
+   
+   docker container run:: Initiates the process to create and start a new container.
+   -d:: Runs the container in detached mode, which means it runs in the background, and the terminal is free for other commands.
+   --name test:: Assigns the name "test" to the container.
+   -p 8082:8082:: Maps port 8082 on the host to port 8082 in the container.
+   testing:0.0.1:: Specifies the image name and tag (version) to use for creating the container
+   
+   example
+   docker container run -d --name test -p 8082:8082 testing:0.0.1
+
+5. Push the Image to the Docker Hub
+
+   # Re-tag the local image with the full repository path
+     docker tag testing:01 docker.io/usman0011/testing:01
+
+   # Push the re-tagged image
+     docker push docker.io/usman0011/testing:01
+	 
+6. Logs of Containers
+   syntax 
+   docker logs <ContainerID>
+   
+   example 
+   docker logs 43f3a11ab921
+   
+7. Stop Container    
+   syntax 
+   docker Stop <ContainerID>
+   
+   example 
+   docker stop 43f3a11ab921
+   
+8. Start Container    
+   syntax 
+   docker Start <ContainerID>
+   
+   example 
+   docker start 43f3a11ab921   
+   
+9. Remove a container from docker  
+   1. stop running containers then remove/delete container
+   syntax 
+   docker rm <id-of-container>
+   
+   example 
+   docker rm 43f3a11ab921   
+  
+10. Remove an image from docker
+   1. stop running containers then remove/delete container
+   syntax 
+   docker rmi <id-of-image>
+   
+   example 
+   docker rmi ee7483559326
+ 
+11. This command is used to access the running container
+  syntax 
+   docker exec -it <container id> bash
+   or
+   docker exec -it <container id> sh
+   
+   example 
+   docker exec -it b39ce052eaa0 sh
+ 
+ coming out from container we need to used exit command
+
+12. delete all volumes
+    docker volume prune 
+ 
+
+Error
+
+cd /project/app
+npm rebuild bcrypt --build-from-source
+
+
+cd /project/app
+rm -rf node_modules
+rm package-lock.json
+npm install
+
+ 
