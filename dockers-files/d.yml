@@ -1,0 +1,75 @@
+# with dockerfile
+version: '3'
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile  # Specify the path to your Dockerfile
+    container_name: node_app
+    restart: always
+    working_dir: /app
+    volumes:
+      - ./app:/app
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongo
+    command: sh -c "npm install && npm run dev"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "-X", "GET", "http://localhost:3000"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    env_file:
+      - .env
+
+  mongo:
+    image: mongo:latest
+    container_name: mongo_db
+    env_file:
+      - .env
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+volumes:
+  mongo_data:
+
+
+
+# without dockerfile
+version: '3'
+services:
+  web:
+    image: node:latest
+    container_name: node_app
+    restart: always
+    working_dir: /app
+    volumes:
+      - ./app:/app
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongo
+    command: sh -c "npm install && npm start"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "-X", "GET","http://localhost:3000"]  # Adjust the URL based on your application's health check endpoint
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    env_file:
+      - .env  # Specify the path to your .env file
+
+  mongo:
+    image: mongo:latest
+    container_name: mongo_db
+    env_file:
+      - .env  # Specify the path to your .env file
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+volumes:
+  mongo_data:

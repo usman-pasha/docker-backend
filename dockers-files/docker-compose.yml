@@ -1,0 +1,98 @@
+# version: '3'
+# services:
+#   web:
+#     build:
+#       context: .
+#       dockerfile: Dockerfile  # Specify the path to your Dockerfile
+#     image: node:18  # Updated Node.js image tag  
+#     container_name: node_app
+#     env_file:
+#       - .env
+#     volumes:
+#       - ./app:/app
+#     ports:
+#       - "8000:8000"
+#     depends_on:
+#       - mongo
+
+#   mongo:
+#     image: mongo:latest
+#     container_name: mongo_db
+#     env_file:
+#       - .env
+#     ports:
+#       - "27017:27017"
+#     volumes:
+#       - mongo_data:/data/db
+
+# volumes:
+#   mongo_data:
+
+version: '3.1'
+services:
+
+#########################################
+# node core api
+#########################################
+  api:
+    image: apis:v1
+    container_name: node_apis
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - 8080:8080
+    depends_on:
+      - db   
+    healthcheck:
+      test: ["CMD", "curl", "-f", "-X", "GET", "http://localhost:3000"]
+      interval: 30s
+      timeout: 10s
+      retries: 3      
+    volumes:
+      - ./:/usr/src/app
+    networks:
+      - app-network      
+
+#########################################
+# Database Mongo 
+#########################################      
+
+  db:
+    image: mongo:latest
+    container_name: mongo_instance
+    restart: always
+    ports:
+      - 27017:27017
+    volumes:
+      - mongo_data:/data/db  
+    healthcheck:
+      test: ["CMD", "mongo", "--eval", "db.stats()"]
+      interval: 10s
+      timeout: 5s
+      retries: 4  
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example  
+    networks:
+      - app-network      
+
+  nginx:
+    image: nginx:stable-alpine
+    container_name: webserver
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf  # Updated Nginx configuration file path
+    depends_on:
+      - api
+    networks:
+      - app-network
+
+volumes:
+  mongo_data:      
+
+networks:
+  app-network:
+    driver: bridge  
