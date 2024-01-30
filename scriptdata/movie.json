@@ -1,0 +1,100 @@
+{
+  "movies": [
+    {
+      "id": 1,
+      "movieName": "Rolex",
+      "actor": "Suriya",
+      "seatType": [
+        {
+          "type": "front",
+          "ticketType": "silver",
+          "coin": 250,
+          "leftTickets": 160
+        },
+        {
+          "type": "back",
+          "ticketType": "gold",
+          "coin": 300,
+          "leftTickets": 140
+        },
+        {
+          "type": "corner",
+          "ticketType": "daimond",
+          "coin": 350,
+          "leftTickets": 200
+        }
+      ],
+      "totalTickets": 500,
+      "soldTickets": 0,
+      "showType": [
+        { "show": "first show", "timing": "10-12" },
+        { "show": "matinee show", "timing": "14-16" },
+        { "show": "second show", "timing": "18-20" }
+      ]
+    },
+    {
+      "id": 2,
+      "movieName": "Leo",
+      "actor": "Vijay",
+      "seatType": [
+        {
+          "type": "front",
+          "ticketType": "silver",
+          "coin": 250,
+          "leftTickets": 160
+        },
+        {
+          "type": "back",
+          "ticketType": "gold",
+          "coin": 300,
+          "leftTickets": 140
+        },
+        {
+          "type": "corner",
+          "ticketType": "daimond",
+          "coin": 350,
+          "leftTickets": 50
+        }
+      ],
+      "totalTickets": 350,
+      "soldTickets": 0,
+      "showType": [
+        { "show": "first show", "timing": "10-12" },
+        { "show": "matinee show", "timing": "14-16" },
+        { "show": "second show", "timing": "18-20" }
+      ]
+    },
+    {
+      "id": 3,
+      "movieName": 24,
+      "actor": "Suriya",
+      "seatType": [
+        {
+          "type": "front",
+          "ticketType": "silver",
+          "coin": 250,
+          "leftTickets": 180
+        },
+        {
+          "type": "back",
+          "ticketType": "gold",
+          "coin": 300,
+          "leftTickets": 120
+        },
+        {
+          "type": "corner",
+          "ticketType": "daimond",
+          "coin": 350,
+          "leftTickets": 100
+        }
+      ],
+      "totalTickets": 400,
+      "soldTickets": 0,
+      "showType": [
+        { "show": "first show", "timing": "10-12" },
+        { "show": "matinee show", "timing": "14-16" },
+        { "show": "second show", "timing": "18-20" }
+      ]
+    }
+  ]
+}
